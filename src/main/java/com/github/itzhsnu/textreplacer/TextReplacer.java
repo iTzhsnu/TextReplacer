@@ -17,7 +17,7 @@ public class TextReplacer extends JFrame implements ActionListener {
     private final JCheckBox check_Up_and_Low = new JCheckBox("Check Uppercase and Lowercase");
 
     public TextReplacer() {
-        setTitle("Text Replacer 1.0.0");
+        setTitle("Text Replacer 1.0.1");
         setBounds(100, 100, 750, 490);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -83,8 +83,10 @@ public class TextReplacer extends JFrame implements ActionListener {
                 String out = docOut.getText(elementOut.getStartOffset(), elementOut.getEndOffset() - elementOut.getStartOffset() - 1);
 
                 if (!in.isEmpty()) {
-                    String change = base.getText().replaceAll(in, out);
-                    if (!check_Up_and_Low.isSelected()) change = base.getText().replaceAll("(?i)" + in, out);
+                    String baseText = base.getText();
+                    if (i >= 1) baseText = changed.getText();
+                    String change = baseText.replaceAll(in, out);
+                    if (!check_Up_and_Low.isSelected()) change = baseText.replaceAll("(?i)" + in, out);
                     changed.setText(change);
                 }
 
